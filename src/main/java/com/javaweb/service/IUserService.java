@@ -7,6 +7,7 @@ import com.javaweb.exception.MyException;
 import com.javaweb.model.response.ResponseDTO;
 import org.springframework.data.domain.Pageable;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,4 +26,5 @@ public interface IUserService {
 //    ResponseDTO listStaff(Long buildingId);
     List<UserDTO> getAllUsers(Pageable pageable);
     int countTotalItems();
+    HashMap<Long,String> getStaff();
 }

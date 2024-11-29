@@ -10,6 +10,7 @@ import com.javaweb.exception.MyException;
 import com.javaweb.repository.RoleRepository;
 import com.javaweb.repository.UserRepository;
 import com.javaweb.service.IUserService;
+import jdk.nashorn.internal.objects.NativeArray;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -82,6 +84,16 @@ public class UserService implements IUserService {
         return userRepository.countTotalItem();
     }
 
+    @Override
+    public  HashMap<Long, String> getStaff() {
+        List<UserEntity> userEntities = userRepository.findByStatusAndRoles_Code(1, "ADMIN");
+        HashMap<Long, String> result = new HashMap<>();
+
+        for(UserEntity it :userEntities){
+            result.put(it.getId(),it.getFullName());
+        }
+        return result;
+    }
 
 
     @Override
